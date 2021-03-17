@@ -1,4 +1,19 @@
 #!/sbin/sh
+#
+# Copyright (C) 2021 The LineageOS Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 DATABLOCK="/dev/block/platform/hi_mci.0/by-name/userdata"
 UPDATERFD_PATH=""
@@ -37,30 +52,6 @@ checkerror() {
     fi
 }
 
-printheader() {
-mecho '                                        '
-mecho '            .:+syyhhhhyyo+:.            '
-mecho '        `/sdddyo+/::::/+oyddhs:`        '
-mecho '      -sddy+-              -+yddo.      '
-mecho '    .yddo.                    .odds.    '
-mecho '   /dds`   .-`            `-.   `sdd/   '
-mecho '  odd/    sddd/          /ddds    /ddo  '
-mecho ' +dd:     hdddd/        /ddddh     :dd+ '
-mecho '.ddo      hddddd/      :dddddh      odd.'
-mecho 'odd`      hdd+hdd:    :ddh+ddh      `ddo'
-mecho 'ydh       hdd/`hdd:  :ddh`/ddh       hdy'
-mecho 'ydh       hdd/ `hdd:-ddh` /ddh       hdy'
-mecho 'odd`      hdd/  .hddddh.  /ddh      `ddo'
-mecho '-dd+      hdd/   .hddh.   /ddh      +dd-'
-mecho ' odd-     hdd/    `//`    /ddh     -ddo '
-mecho '  sdd:    ydd:            :ddy    :dds  '
-mecho '   +ddo`   .`              `.   `odd+   '
-mecho '    .yddo.                    .oddy-    '
-mecho '      -sddy+-              -/ydds:      '
-mecho '        `/sdddyo+/::::/+oyddds/`        '
-mecho '            .:+syyhhhhyys+/.            '
-mecho '                                        '
-}
 
 clearscreen() {
     I=0

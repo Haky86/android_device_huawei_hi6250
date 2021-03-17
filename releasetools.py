@@ -1,18 +1,18 @@
-# Copyright (C) 2012 The Android Open Source Project
-# Copyright (C) 2012 The CyanogenMod Project
-# Copyright (C) 2014 Jonathan Jason Dennis [Meticulus] (theonejohnnyd@gmail.com)
+#
+# Copyright (C) 2021 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 """Custom OTA commands for hi6250"""
 
@@ -62,40 +62,6 @@ def FullOTA_Assertions(info):
 
   info.script.AppendExtra('assert(run_program("/tmp/install/bin/stock-check.sh") == 0 || abort("stock-check failed."););')
   info.script.AppendExtra('assert(run_program("/tmp/install/bin/data-formatter.sh") == 0 || abort("ERROR!: Data could not be formatted! You should reboot to recovery after installation and format /data!"););')
-
-
-def FullOTA_InstallBegin(info):
-  info.script.AppendExtra('ui_print("                                                   ");');
-  info.script.AppendExtra('ui_print("                     .:+syyhhhhyyo+:.              ");');
-  info.script.AppendExtra('ui_print("                 `/sdddyo+/::::/+oyddhs:`          ");');
-  info.script.AppendExtra('ui_print("               -sddy+-              -+yddo.        ");');
-  info.script.AppendExtra('ui_print("             .yddo.                    .odds.      ");');
-  info.script.AppendExtra('ui_print("            /dds`   .-`            `-.   `sdd/     ");');
-  info.script.AppendExtra('ui_print("           odd/    sddd/          /ddds    /ddo    ");');
-  info.script.AppendExtra('ui_print("          +dd:     hdddd/        /ddddh     :dd+   ");');
-  info.script.AppendExtra('ui_print("         .ddo      hddddd/      :dddddh      odd.  ");');
-  info.script.AppendExtra('ui_print("         odd`      hdd+hdd:    :ddh+ddh      `ddo  ");');
-  info.script.AppendExtra('ui_print("         ydh       hdd/`hdd:  :ddh`/ddh       hdy  ");');
-  info.script.AppendExtra('ui_print("         ydh       hdd/ `hdd:-ddh` /ddh       hdy  ");');
-  info.script.AppendExtra('ui_print("         odd`      hdd/  .hddddh.  /ddh      `ddo  ");');
-  info.script.AppendExtra('ui_print("         -dd       hdd/   .hddh.   /ddh      +dd-  ");');
-  info.script.AppendExtra('ui_print("          odd-     hdd/    `//`    /ddh     -ddo   ");');
-  info.script.AppendExtra('ui_print("           sdd:    ydd:            :ddy    :dds    ");');
-  info.script.AppendExtra('ui_print("            +ddo`   .`              `.   `odd      ");');
-  info.script.AppendExtra('ui_print("             .yddo.                    .oddy-      ");');
-  info.script.AppendExtra('ui_print("               -sddy+-              -/ydds:        ");');
-  info.script.AppendExtra('ui_print("                 `/sdddyo+/::::/+oyddds/`          ");');
-  info.script.AppendExtra('ui_print("                     .:+syyhhhhyys+/.              ");');
-  info.script.AppendExtra('ui_print("                                                   ");');
-  info.script.AppendExtra('ui_print("                   Meticulus Development           ");');
-  info.script.AppendExtra('ui_print("                   http://meticulus.co.vu          ");');
-  info.script.AppendExtra('ui_print("                                                   ");');
-  info.script.AppendExtra('ui_print("                   Our Thanks to:                  ");');
-  info.script.AppendExtra('ui_print("                   dady8889                        ");');
-  info.script.AppendExtra('ui_print("                   felix-development               ");');
-  info.script.AppendExtra('ui_print("                   HassanMirza01                   ");');
-  info.script.AppendExtra('ui_print("                   petya230                        ");');
-  info.script.AppendExtra('ui_print("                                                   ");');
 
 def FullOTA_InstallEnd(info):
   info.script.AppendExtra('package_extract_dir("override", "/system");')

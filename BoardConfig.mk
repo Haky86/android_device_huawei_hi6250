@@ -1,11 +1,11 @@
 #
-# Copyright (C) 2016 Jonathan Jason Dennis (theonejohnnyd@gmail.com)
+# Copyright (C) 2021 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,56 +14,65 @@
 # limitations under the License.
 #
 
-TARGET_SPECIFIC_HEADER_PATH := device/huawei/hi6250/include
+# 64 Bit
+ANDROID_64 :=true
+TARGET_SUPPORTS_32_BIT_APPS := true
+TARGET_SUPPORTS_64_BIT_APPS := true
+TARGET_USES_64_BIT_BINDER := true
+TARGET_USES_HISI_DTIMAGE := true
+
+# Arch
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_SMP := true
+TARGET_CPU_VARIANT := cortex-a53
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := cortex-a15
+
+# Asserts
 TARGET_OTA_ASSERT_DEVICE := hi6250,VNS,nemo,berlin,venus,prague,bond
 
-# Board
-TARGET_BOOTLOADER_BOARD_NAME := hisi
+# Audio
+BOARD_USES_ALSA_AUDIO := true
+
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := hi6250
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-# Platform 
-TARGET_BOARD_PLATFORM := hi6250
-TARGET_CPU_SMP := true
-TARGET_USES_64_BIT_BINDER := true
-TARGET_USES_HISI_DTIMAGE := true
-TARGET_SUPPORTS_32_BIT_APPS := true
-TARGET_SUPPORTS_64_BIT_APPS := true
-ANDROID_64 :=true
+# Charger 
+BACKLIGHT_PATH := "/sys/class/leds/lcd_backlight0/brightness"
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+HEALTHD_BACKLIGHT_LEVEL := 102
+HEALTHD_FORCE_BACKLIGHT_CONTROL := true
 
-# 1st Arch
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_CPU_VARIANT := cortex-a53
-TARGET_CPU_ABI := arm64-v8a
-TARGET_BOARD_GPU := mali-t830mp2
+# CyanogenMode Hardware
+BOARD_HARDWARE_CLASS := device/huawei/hi6250/cmhw/
 
-#2nd Arch
-TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_VARIANT := cortex-a15
-TARGET_2ND_CPU_ABI := armeabi-v7a
-TARGET_2ND_CPU_ABI2 := armeabi
-
-# Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2080374784
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 11231219712
-BOARD_FLASH_BLOCK_SIZE := 4096
+# File System
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Kernel
-TARGET_KERNEL_CONFIG := merge_hi6250_defconfig
-TARGET_KERNEL_SOURCE := kernel/huawei/hi6250
-BOARD_KERNEL_CMDLINE := loglevel=4 coherent_pool=512K page_tracker=on slub_min_objects=12 androidboot.selinux=permissive
-BOARD_KERNEL_BASE := 0x00478000
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07588000
+# GPS
+TARGET_NO_RPC := true
+USE_DEVICE_SPECIFIC_GPS := true
+
+# Graphics
+BOARD_EGL_CFG := device/huawei/hi6250/egl.cfg
+HWUI_COMPILE_SYMBOLS := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 6
+TARGET_BOARD_GPU := mali-t830mp2
+TARGET_HARDWARE_3D := true
+USE_OPENGL_RENDERER := true
+
+# Hardware
 HISI_TARGET_PRODUCT := hi6250
-TARGET_ARM_TYPE := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_SPECIFIC_HEADER_PATH := device/huawei/hi6250/include
 
 # Init
 TARGET_INIT_VENDOR_LIB := libhuawei_init
@@ -78,27 +87,22 @@ WARSAW_SHIMS := '/hwvendor/lib64/hwcam/hwcam.hi6250.m.WARSAW.so|libshim_libui.so
 
 COMMON_SHIMS := '/hwvendor/lib/hw/audio.primary.hisi.so|libshim.so:/hwvendor/lib64/libcamera_algo.so|libshim_libui.so:/hwvendor/lib64/hw/fingerprint.hi6250.so|libshim.so'
 
-# Linker
 LD_SHIM_LIBS := $(COMMON_SHIMS):$(BERLIN_SHIMS):$(BOND_SHIMS):$(DALLAS_SHIMS):$(NEMO_SHIMS):$(PRAGUE_SHIMS):$(VENUS_SHIMS):$(WARSAW_SHIMS)
 
 ## Uncomment to see LD_SHIM_LIBS var
 #$(shell echo $(LD_SHIM_LIBS) >&2)
 
-# RIL
-BOARD_RIL_CLASS := ../../../device/huawei/hi6250/ril/
-SIM_COUNT := 2
-BOARD_PROVIDES_RILD := true
-BOARD_PROVIDES_LIBRIL := true
-BOARD_PROVIDES_LIBREFERENCE_RIL := true
+# Kernel
+BOARD_KERNEL_CMDLINE := loglevel=4 coherent_pool=512K page_tracker=on slub_min_objects=12 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x00478000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07588000
 
-# Graphics
-USE_OPENGL_RENDERER := true
-TARGET_HARDWARE_3D := true
-BOARD_EGL_CFG := device/huawei/hi6250/egl.cfg
-HWUI_COMPILE_SYMBOLS := true
+TARGET_ARM_TYPE := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
-# Surfaceflinger
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 6
+TARGET_KERNEL_CONFIG := merge_hi6250_defconfig
+TARGET_KERNEL_SOURCE := kernel/huawei/hi6250
 
 # NFC
 BOARD_NFC_CHIPSET := pn548
@@ -108,32 +112,28 @@ NXP_CHIP_TYPE := 2
 # OTA
 # BLOCK_BASED_OTA := false
 
-# WIFI
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_HOSTAPD_DRIVER := NL80211
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
+BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2080374784
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 11231219712
 
-# Screen
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
-
-# Audio
-BOARD_USES_ALSA_AUDIO := true
-
-# Define kind of DPI
-PRODUCT_AAPT_CONFIG := normal xxhdpi
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
-# Charger 
-BOARD_CHARGER_DISABLE_INIT_BLANK := true
-BACKLIGHT_PATH := "/sys/class/leds/lcd_backlight0/brightness"
-HEALTHD_BACKLIGHT_LEVEL := 102
-HEALTHD_FORCE_BACKLIGHT_CONTROL := true
+# Platform
+BOARD_VENDOR_PLATFORM := hi6250
+TARGET_BOARD_PLATFORM := hi6250
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/huawei/hi6250/rootdir/fstab.hi6250
+TARGET_RECOVERY_FSTAB := device/huawei/hi6250/rootdir/etc/fstab.hi6250
 
-# cmhw
-BOARD_HARDWARE_CLASS := device/huawei/hi6250/cmhw/
+# RIL
+BOARD_PROVIDES_LIBRIL := true
+BOARD_PROVIDES_LIBREFERENCE_RIL := true
+BOARD_PROVIDES_RILD := true
+BOARD_RIL_CLASS := ../../../device/huawei/hi6250/ril/
+SIM_COUNT := 2
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
@@ -144,3 +144,8 @@ BOARD_SEPOLICY_DIRS += \
 	device/huawei/hi6250/cm_sepolicy
 endif
 
+# WIFI
+BOARD_HOSTAPD_DRIVER := NL80211
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+-include vendor/huawei/hi6250/BoardConfigVendor.mk
